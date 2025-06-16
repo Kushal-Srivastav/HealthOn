@@ -27,7 +27,7 @@ model User{
   credits             Int @default(2)
 
   speciality        String?
-  Experience         Int?
+  experience         Int?
   credentialUrl      String?
   description       String? @db.Text
   verificationStatus VerificationStatus? @default(PENDING)
@@ -73,9 +73,9 @@ enum SlotStatus{
 model Appointment {
   id                String   @id @default(uuid())
   patientId         String
-  patient           User     @relation("PatientAppointments", fields: [patientId], references: [id])
+  patient           User     @relation("PatientAppointments", fields: [patientId], references: [id], onDelete: NoAction, onUpdate: Cascade)
   doctorId          String
-  doctor            User     @relation("DoctorAppointments", fields: [doctorId], references: [id])
+  doctor            User     @relation("DoctorAppointments", fields: [doctorId], references: [id], onDelete: NoAction, onUpdate: Cascade)
   startTime         DateTime // Start time of appointment
   endTime           DateTime // End time of appointment
   status            AppointmentStatus @default(SCHEDULED)

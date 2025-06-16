@@ -16,10 +16,34 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider appearance={{
       baseTheme: "dark",
+      elements: {
+        root: {
+          position: "relative",
+        },
+        drawerRoot: {
+          position: "fixed",
+          inset: 0,
+          zIndex: 999999,
+        },
+        drawerContent: {
+          position: "fixed",
+          top: 0,
+          right: 0,
+          bottom: 0,
+          width: "100%",
+          maxWidth: "450px",
+          zIndex: 999999,
+        },
+        drawerOverlay: {
+          position: "fixed",
+          inset: 0,
+          zIndex: 999998,
+        }
+      }
     }}>
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className}`}>
+        className={`${inter.className} relative`}>
              <ThemeProvider
             attribute="class"
             defaultTheme="dark"
@@ -28,7 +52,7 @@ export default function RootLayout({ children }) {
             
                  {/*header */}
                  <Header />
-          <main className="min-h-screen">{children}</main>
+          <main className="min-h-screen relative">{children}</main>
           {/*footer*/}
           <footer className="bg-muted/50 py-12">
             <div className="container mx-auto px-4 text-center text-gray-200">

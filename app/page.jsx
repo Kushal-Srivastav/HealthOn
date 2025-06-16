@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { creditBenefits, features, testimonials } from '@/lib/data'
+import { PricingTable } from '@clerk/nextjs'
 const page = () => {
   return (
     <div className='bg-background'>
@@ -97,6 +98,7 @@ const page = () => {
       </div>
         <div>
           {/*Pricing Table*/}
+          <PricingTable />
                     <Card className='mt-12 bg-muted/20 border-emerald-900/30'>
               <CardHeader>
              <CardTitle className='text-xl font-semibold text-white flex items-center'>
