@@ -37,13 +37,13 @@ export async function setUserRole(formData){
       return { success: true, redirect: "/doctors"}
     }
       if (role === "DOCTOR") {
-      const specialty = formData.get("specialty");
+      const speciality = formData.get("specialty");
       const experience = parseInt(formData.get("experience"), 10);
       const credentialUrl = formData.get("credentialUrl");
       const description = formData.get("description");
 
       // Validate inputs
-      if (!specialty || !experience || !credentialUrl || !description) {
+      if (!speciality || !experience || !credentialUrl || !description) {
         throw new Error("All fields are required");
       }
 
@@ -53,7 +53,7 @@ export async function setUserRole(formData){
         },
         data: {
           role: "DOCTOR",
-          specialty,
+          speciality,
           experience,
           credentialUrl,
           description,

@@ -31,7 +31,7 @@ export function VerifiedDoctors({ doctors }) {
     const query = searchTerm.toLowerCase();
     return (
       doctor.name.toLowerCase().includes(query) ||
-      doctor.specialty.toLowerCase().includes(query) ||
+      doctor.speciality.toLowerCase().includes(query) ||
       doctor.email.toLowerCase().includes(query)
     );
   });
@@ -115,7 +115,7 @@ export function VerifiedDoctors({ doctors }) {
                               {doctor.name}
                             </h3>
                             <p className="text-sm text-muted-foreground">
-                              {doctor.specialty} • {doctor.experience} years
+                              {doctor.speciality} • {doctor.experience} years
                               experience
                             </p>
                             <p className="text-sm text-muted-foreground mt-1">

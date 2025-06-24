@@ -15,11 +15,13 @@ export async function setAvailabilitySlots(formData) {
   }
 
   try {
-    // Get the doctor
+    // Get the doctor (allow both DOCTOR and ADMIN roles)
     const doctor = await db.user.findUnique({
       where: {
         clerkUserId: userId,
-        role: "DOCTOR",
+        role: {
+          in: ["DOCTOR", "ADMIN"],
+        },
       },
     });
 
@@ -97,7 +99,9 @@ export async function getDoctorAvailability() {
     const doctor = await db.user.findUnique({
       where: {
         clerkUserId: userId,
-        role: "DOCTOR",
+        role: {
+          in: ["DOCTOR", "ADMIN"],
+        },
       },
     });
 
@@ -135,7 +139,9 @@ export async function getDoctorAppointments() {
     const doctor = await db.user.findUnique({
       where: {
         clerkUserId: userId,
-        role: "DOCTOR",
+        role: {
+          in: ["DOCTOR", "ADMIN"],
+        },
       },
     });
 
@@ -295,7 +301,9 @@ export async function addAppointmentNotes(formData) {
     const doctor = await db.user.findUnique({
       where: {
         clerkUserId: userId,
-        role: "DOCTOR",
+        role: {
+          in: ["DOCTOR", "ADMIN"],
+        },
       },
     });
 
@@ -354,7 +362,9 @@ export async function markAppointmentCompleted(formData) {
     const doctor = await db.user.findUnique({
       where: {
         clerkUserId: userId,
-        role: "DOCTOR",
+        role: {
+          in: ["DOCTOR", "ADMIN"],
+        },
       },
     });
 
@@ -412,8 +422,6 @@ export async function markAppointmentCompleted(formData) {
     return { success: true, appointment: updatedAppointment };
   } catch (error) {
     console.error("Failed to mark appointment as completed:", error);
-    throw new Error(
-      "Failed to mark appointment as completed: " + error.message
-    );
+    throw new Error("Failed to complete appointment: " + error.message);
   }
 }

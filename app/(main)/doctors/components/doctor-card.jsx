@@ -34,7 +34,7 @@ export function DoctorCard({ doctor }) {
             </div>
 
             <p className="text-sm text-muted-foreground mb-1">
-              {doctor.specialty} • {doctor.experience} years experience
+              {doctor.speciality} • {doctor.experience} years experience
             </p>
 
             <div className="mt-4 line-clamp-2 text-sm text-muted-foreground mb-4">
@@ -45,7 +45,7 @@ export function DoctorCard({ doctor }) {
               asChild
               className="w-full bg-emerald-500 hover:bg-emerald-600 mt-2"
             >
-              <Link href={`/doctors/${doctor.specialty}/${doctor.id}`}>
+              <Link href={`/doctors/${doctor.speciality}/${doctor.id}`}>
                 <Calendar className="h-4 w-4 mr-2" />
                 View Profile & Book
               </Link>

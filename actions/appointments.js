@@ -1,20 +1,18 @@
 "use server";
 
+import "cross-fetch/polyfill";
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { deductCreditsForAppointment } from "@/actions/credits";
-import { Vonage } from "@vonage/server-sdk";
+import OpenTok from "opentok";
 import { addDays, addMinutes, format, isBefore, endOfDay } from "date-fns";
-import { Auth } from "@vonage/auth";
 
-// Initialize Vonage Video API client
-const credentials = new Auth({
-  applicationId: process.env.NEXT_PUBLIC_VONAGE_APPLICATION_ID,
-  privateKey: process.env.VONAGE_PRIVATE_KEY,
-});
-const options = {};
-const vonage = new Vonage(credentials, options);
+// Initialize OpenTok with your API credentials
+const opentok = new OpenTok(
+  process.env.VONAGE_API_KEY,
+  process.env.VONAGE_API_SECRET
+);
 
 /**
  * Book a new appointment with a doctor
@@ -146,14 +144,19 @@ export async function bookAppointment(formData) {
 /**
  * Generate a Vonage Video API session
  */
-async function createVideoSession() {
-  try {
-    const session = await vonage.video.createSession({ mediaMode: "routed" });
-    return session.sessionId;
-  } catch (error) {
-    throw new Error("Failed to create video session: " + error.message);
-  }
-}
+const createVideoSession = () => {
+  return new Promise((resolve, reject) => {
+    // Create a session that will attempt to transmit streams directly between
+    // clients. If clients cannot connect, the session will use the OpenTok cloud.
+    opentok.createSession({ mediaMode: "routed" }, (err, session) => {
+      if (err) {
+        reject(new Error("Failed to create video session: " + err.message));
+      } else {
+        resolve(session.sessionId);
+      }
+    });
+  });
+};
 
 /**
  * Generate a token for a video session
@@ -229,7 +232,7 @@ export async function generateVideoToken(formData) {
     });
 
     // Generate the token with appropriate role and expiration
-    const token = vonage.video.generateClientToken(appointment.videoSessionId, {
+    const token = opentok.generateToken(appointment.videoSessionId, {
       role: "publisher", // Both doctor and patient can publish streams
       expireTime: expirationTime,
       data: connectionData,

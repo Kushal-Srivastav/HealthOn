@@ -38,6 +38,7 @@ model User{
   doctorAppointments Appointment[] @relation("DoctorAppointments")
   availabilities    Availability[]
   transactions      CreditTransaction[]
+  payouts          Payout[]
 }
 
 enum UserRole{
@@ -115,7 +116,7 @@ enum TransactionType {
   ADMIN_ADJUSTMENT      // Manual adjustment by admin
 }
 
- /*model Payout {
+model Payout {
   id              String        @id @default(uuid())
   doctorId        String
   doctor          User          @relation(fields: [doctorId], references: [id], onDelete: Cascade)
@@ -137,4 +138,4 @@ enum TransactionType {
 enum PayoutStatus {
   PROCESSING
   PROCESSED
-} */
+}

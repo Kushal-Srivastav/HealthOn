@@ -248,7 +248,7 @@ export function AppointmentCard({
                 )}
                 {userRole === "PATIENT" && (
                   <p className="text-sm text-muted-foreground">
-                    {otherParty.specialty}
+                    {otherParty.speciality}
                   </p>
                 )}
                 <div className="flex items-center mt-2 text-sm text-muted-foreground">
@@ -346,7 +346,7 @@ export function AppointmentCard({
                   )}
                   {userRole === "PATIENT" && (
                     <p className="text-muted-foreground text-sm">
-                      {otherParty.specialty}
+                      {otherParty.speciality}
                     </p>
                   )}
                 </div>

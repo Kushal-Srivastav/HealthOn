@@ -90,7 +90,7 @@ export function DoctorProfile({ doctor, availableDays }) {
                   variant="outline"
                   className="bg-emerald-900/20 border-emerald-900/30 text-emerald-400 mb-4"
                 >
-                  {doctor.specialty}
+                  {doctor.speciality}
                 </Badge>
 
                 <div className="flex items-center justify-center mb-2">

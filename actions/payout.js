@@ -22,7 +22,9 @@ export async function requestPayout(formData) {
     const doctor = await db.user.findUnique({
       where: {
         clerkUserId: userId,
-        role: "DOCTOR",
+        role: {
+          in: ["DOCTOR", "ADMIN"],
+        },
       },
     });
 
@@ -100,7 +102,9 @@ export async function getDoctorPayouts() {
     const doctor = await db.user.findUnique({
       where: {
         clerkUserId: userId,
-        role: "DOCTOR",
+        role: {
+          in: ["DOCTOR", "ADMIN"],
+        },
       },
     });
 
@@ -137,7 +141,9 @@ export async function getDoctorEarnings() {
     const doctor = await db.user.findUnique({
       where: {
         clerkUserId: userId,
-        role: "DOCTOR",
+        role: {
+          in: ["DOCTOR", "ADMIN"],
+        },
       },
     });
 

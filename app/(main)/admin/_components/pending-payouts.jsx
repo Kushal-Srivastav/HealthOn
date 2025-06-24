@@ -109,7 +109,7 @@ export function PendingPayouts({ payouts }) {
                             Dr. {payout.doctor.name}
                           </h3>
                           <p className="text-sm text-muted-foreground">
-                            {payout.doctor.specialty}
+                            {payout.doctor.speciality}
                           </p>
                           <div className="flex flex-wrap items-center gap-4 mt-2 text-sm text-muted-foreground">
                             <div className="flex items-center">
@@ -210,7 +210,7 @@ export function PendingPayouts({ payouts }) {
                       Specialty
                     </p>
                     <p className="text-white">
-                      {selectedPayout.doctor.specialty}
+                      {selectedPayout.doctor.speciality}
                     </p>
                   </div>
                   <div>

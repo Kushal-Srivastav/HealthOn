@@ -1,18 +1,18 @@
 import { redirect } from "next/navigation";
-import { getDoctorsBySpecialty } from "@/actions/doctors-listing";
+import { getDoctorsBySpecialty as getDoctorsBySpeciality } from "@/actions/doctors-listing";
 import { DoctorCard } from "../components/doctor-card";
 import { PageHeader } from "@/components/page-header";
 
 export default async function DoctorSpecialtyPage({ params }) {
-  const { specialty } = await params;
+  const { specialty: speciality } = await params;
 
   // Redirect to main doctors page if no specialty is provided
-  if (!specialty) {
+  if (!speciality) {
     redirect("/doctors");
   }
 
   // Fetch doctors by specialty
-  const { doctors, error } = await getDoctorsBySpecialty(specialty);
+  const { doctors, error } = await getDoctorsBySpeciality(speciality);
 
   if (error) {
     console.error("Error fetching doctors:", error);
@@ -21,7 +21,7 @@ export default async function DoctorSpecialtyPage({ params }) {
   return (
     <div className="space-y-5">
       <PageHeader
-        title={specialty.split("%20").join(" ")}
+        title={speciality.split("%20").join(" ")}
         backLink="/doctors"
         backLabel="All Specialties"
       />
@@ -38,8 +38,8 @@ export default async function DoctorSpecialtyPage({ params }) {
             No doctors available
           </h3>
           <p className="text-muted-foreground">
-            There are currently no verified doctors in this specialty. Please
-            check back later or choose another specialty.
+            There are currently no verified doctors in this speciality. Please
+            check back later or choose another speciality.
           </p>
         </div>
       )}
